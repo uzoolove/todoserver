@@ -23,11 +23,18 @@
       e.preventDefault();
       const data = $(this).serialize();
       try{
-        const result = await $.post('https://market-lion.koyeb.app/api/users/login', data);
+        // const result = await $.post('https://11.fesp.shop/users/login', data);
+        const result = await $.ajax('https://11.fesp.shop/users/login', {
+          type: 'POST',
+          data,
+          headers: {
+            'client-id': '00-nike',
+          },
+        });
         alert(result.item.name + '님 로그인 되었습니다.');
       }catch(xhr){
         console.error(xhr);
-        alert(xhr.responseJSON?.message);
+        alert(xhr.responseJSON?.errors?.[0].msg || xhr.responseJSON?.message || '로그인 실패');
       }
     });
   </script>
